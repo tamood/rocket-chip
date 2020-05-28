@@ -7,7 +7,7 @@ import scala.collection.mutable.{HashMap}
 
 case class ROMConfig(name: String, depth: Int, width: Int)
 
-class BlackBoxedROM(c: ROMConfig) extends BlackBox {
+class BlackBoxedROM(c: ROMConfig) extends BlackBox(Map("DEPTH" -> chisel3.experimental.IntParam(c.depth), "WIDTH" -> chisel3.experimental.IntParam(c.width))) {
   val io = new Bundle {
     val clock = Clock(INPUT)
     val address = UInt(INPUT, log2Ceil(c.depth))
